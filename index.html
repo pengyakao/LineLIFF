@@ -20,10 +20,16 @@
 <script>
 
     document.getElementById("logoutBtn").addEventListener("click", function () {
-        alert(liff.isLoggedIn());
+        alert("登入狀態:", liff.isLoggedIn());
         if (liff.isLoggedIn()) {
             liff.logout();
+            alert("已登出");
         }
+        document.getElementById('userId').innerHTML = ""
+        document.getElementById('displayName').innerHTML = ""
+        document.getElementById('pictureUrl').innerHTML = ""
+        document.getElementById('statusMessage').innerHTML = ""
+
     });
 
 
