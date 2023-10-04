@@ -1,54 +1,61 @@
- <!DOCTYPE html>
- <html lang="en">
- 
- <head>
-     <meta charset="UTF-8" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-     <title>Document</title>
- </head>
- 
- <body>
-     <p>userId: <span id="userId"></span></p>
-     <p>displayName: <span id="displayName"></span></p>
-     <p>pictureUrl: <span id="pictureUrl"></span></p>
-     <p>statusMessage: <span id="statusMessage"></span></p>
- </body>
- <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
- 
- <script>
-     // Using a Promise object初始化
-     liff.init({
-         liffId: "2001009394-0MjMVKvv", // Use own liffId
-     })
-         .then(() => {
-             // Start to use liff's api
-             document.getElementById('userId').innerHTML = "yes";
-             //取得使用者資料
-             liff.getProfile()
-                 .then((profile) => {
-                     document.getElementById('userId').innerHTML = profile.userId
-                     document.getElementById('displayName').innerHTML = profile.displayName
-                     document.getElementById('pictureUrl').innerHTML = profile.pictureUrl
-                     document.getElementById('statusMessage').innerHTML = profile.statusMessage
- 
-                 })
-                 .catch((err) => {
-                     document.getElementById('userId').innerHTML = "getProfile error";
-                 });
- 
-         })
-         .catch((err) => {
-             // Error happens during initialization
-             console.log(err.code, err.message);
-             document.getElementById('userId').innerHTML = "no";
- 
-         });
- 
-     // Using a callback
-     liff.init({ liffId: "2001009394-0MjMVKvv" }, successCallback, errorCallback);
- 
- 
- </script>
- 
- </html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="login">登入</button>
+    <p>userId: <span id="userId"></span></p>
+    <p>displayName: <span id="displayName"></span></p>
+    <p>pictureUrl: <span id="pictureUrl"></span></p>
+    <p>statusMessage: <span id="statusMessage"></span></p>
+    <button id="logout">登出</button>
+</body>
+<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+<script>
+    // Using a Promise object初始化
+    liff.init({
+        liffId: "2001009394-0MjMVKvv", // Use own liffId
+    })
+        .then(() => {
+            // Start to use liff's api
+            document.getElementById('userId').innerHTML = "yes";
+            //取得使用者資料
+            liff.getProfile()
+                .then((profile) => {
+                    document.getElementById('userId').innerHTML = profile.userId
+                    document.getElementById('displayName').innerHTML = profile.displayName
+                    document.getElementById('pictureUrl').innerHTML = profile.pictureUrl
+                    document.getElementById('statusMessage').innerHTML = profile.statusMessage
+
+                })
+                .catch((err) => {
+                    document.getElementById('userId').innerHTML = "getProfile error";
+                });
+
+        })
+        .catch((err) => {
+            // Error happens during initialization
+            console.log(err.code, err.message);
+            document.getElementById('userId').innerHTML = "無法取得資料";
+
+        });
+
+    // Using a callback
+    liff.init({ liffId: "2001009394-0MjMVKvv" }, successCallback, errorCallback);
+
+    document.getElementById("logout").addEventListener("click", function () {
+        if (liff.isLoggedIn()) {
+            liff.logout();
+        }
+    });
+
+</script>
+
+</html>
