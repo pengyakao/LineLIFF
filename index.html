@@ -46,7 +46,7 @@
                 document.getElementById('statusMessage').innerHTML = profile.statusMessage;
             })
             .catch((err) => {
-                console.error("获取用户数据错误:", err);
+                alert("获取用户数据错误:", err);
             });
     });
 
@@ -55,7 +55,7 @@
         liffId: "2001009394-0MjMVKvv", // 使用你自己的 liffId
     })
         .catch((err) => {
-            console.error("LIFF 初始化错误:", err);
+            alert("LIFF 初始化错误:", err);
         });
 
 
