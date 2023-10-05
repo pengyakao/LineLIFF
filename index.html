@@ -12,16 +12,24 @@
     <p>userId: <span id="userId"></span></p>
     <p>displayName: <span id="displayName"></span></p>
     <p>pictureUrl: <span id="pictureUrl"></span></p>
+    <p>getAccessToken: <span id="getAccessToken"></span></p>
+    <p>getAccessToken: <span id="getIDToken"></span></p>
+    <p>getDecodedIDToken: <span id="getDecodedIDToken"></span></p>
+
     <p>statusMessage: <span id="statusMessage"></span></p>
-    <p>getOS: <span id="userOS"></span></p>
-    <p>getLanguage: <span id="userLang"></span></p>
-    <p>getVersion: <span id="userVer"></span></p>
-    <p>getLineVersion: <span id="userLineVer"></span></p>
+    <p>getOS(取得用戶端的作業系統，可能的值只有 ios, android 與 web): <span id="userOS"></span></p>
+    <p>getLanguage(等同於透過 navigator.language 取得目前瀏覽器使用的語言): <span id="userLang"></span></p>
+    <p>getVersion(取得目前 LIFF SDK 使用的版本): <span id="userVer"></span></p>
+    <p>getLineVersion(取得使用者目前 LINE App 的版本): <span id="userLineVer"></span></p>
     <p>getContext: <span id="userContext"></span></p>
-    <p>isInClient: <span id="isInClient"></span></p>
+    <p>isInClient(判斷目前網頁是否跑在 LIFF Browser 底下，你可以藉此判斷是否要初始化 LIFF SDK 或透過 liff.closeWindow() 關閉視窗！): <span id="isInClient"></span></p>
     <p>isLoggedIn: <span id="isLoggedIn"></span></p>
-    <p>shareTargetPicker isApiAvailable: <span id="shareIsApiAvailable"></span></p>
-    <p>是否允許跳轉其他網頁: <span id="multipleIsApiAvailable"></span></p>
+    <p>是否可以分享 shareIsApiAvailable: <span id="shareIsApiAvailable"></span></p>
+    <p>是否允許跳轉其他網頁 multipleIsApiAvailable: <span id="multipleIsApiAvailable"></span></p>
+    <p>liff.ready: 會回傳一個 Promise 並會在 liff.init() 初始化完畢後執行，你可以在.then() callback 撰寫一些程式碼</p>
+    <p>liff.closeWindow(): 你可以任意時間透過這個 API 關閉視窗，甚至於在 liff.init() 初始化完成之前也可以關閉。</p>
+    <p>liff.use(): 啟用與初始化一個 LIFF Plugin</p>
+    <p>liff.i18n.setLang(): 設定 LIFF SDK 的顯示語言，任何 RFC 5646(BCP 47) 定義的語言都可以，繁體中文可以是 zh - Hant 或 zh - Hant - TW 都可以。</p>
     <!-- <button id="logoutBtn">登出</button> -->
 </body>
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
@@ -50,6 +58,11 @@
                     document.getElementById('pictureUrl').innerHTML = "getProfile error";
                     document.getElementById('statusMessage').innerHTML = "getProfile error";
                 });
+
+
+            document.getElementById('getAccessToken').innerHTML = liff.getAccessToken() ?? "error"
+            document.getElementById('getIDToken').innerHTML = liff.getIDToken() ?? "error"
+            document.getElementById('getDecodedIDToken').innerHTML = liff.getDecodedIDToken() ?? "error"
 
             //取得使用者執行 LIFF 應用程式的環境
             document.getElementById('userOS').innerHTML = liff.getOS() ?? "error"
