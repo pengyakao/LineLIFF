@@ -16,6 +16,12 @@
     <p>getOS: <span id="userOS"></span></p>
     <p>getLanguage: <span id="userLang"></span></p>
     <p>getVersion: <span id="userVer"></span></p>
+    <p>getLineVersion: <span id="userLineVer"></span></p>
+    <p>getContext: <span id="userContext"></span></p>
+    <p>isInClient: <span id="isInClient"></span></p>
+    <p>isLoggedIn: <span id="isLoggedIn"></span></p>
+    <p>shareTargetPicker isApiAvailable: <span id="shareIsApiAvailable"></span></p>
+    <p>multipleTargetPicker isApiAvailable: <span id="multipleIsApiAvailable"></span></p>
     <!-- <button id="logoutBtn">登出</button> -->
 </body>
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
@@ -40,19 +46,43 @@
                 })
                 .catch((err) => {
                     document.getElementById('userId').innerHTML = "getProfile error";
+                    document.getElementById('displayName').innerHTML = "getProfile error";
+                    document.getElementById('pictureUrl').innerHTML = "getProfile error";
+                    document.getElementById('statusMessage').innerHTML = "getProfile error";
                 });
 
             //取得使用者執行 LIFF 應用程式的環境
-            document.getElementById('userOS').innerHTML = liff.getOS()
-            document.getElementById('userLang').innerHTML = liff.getLanguage()
-            document.getElementById('userVer').innerHTML = liff.getVersion()
+            document.getElementById('userOS').innerHTML = liff.getOS() ?? "error"
+            document.getElementById('userLang').innerHTML = liff.getLanguage() ?? "error"
+            document.getElementById('userVer').innerHTML = liff.getVersion() ?? "error"
+            document.getElementById('userLineVer').innerHTML = liff.getLineVersion() ?? "error"
+            console.log(liff.getContext())
+            document.getElementById('userContext').innerHTML = liff.getContext().type ?? "error"
+            document.getElementById('isInClient').innerHTML = liff.isInClient() ?? "error"
+            document.getElementById('isLoggedIn').innerHTML = liff.isLoggedIn() ?? "error"
+            document.getElementById('shareIsApiAvailable').innerHTML = liff.isApiAvailable('shareTargetPicker') ?? "error"
+            if (liff.isApiAvailable('shareTargetPicker')) {
+                liff.shareTargetPicker([
+                    {
+                        type: "text",
+                        text: "Hello, World!"
+                    }
+                ])
+                    .then(
+                        console.log("ShareTargetPicker was launched")
+                    ).catch(function (res) {
+                        console.log("Failed to launch ShareTargetPicker")
+                    })
+            }
+            document.getElementById('multipleIsApiAvailable').innerHTML = liff.isApiAvailable('multipleLiffTransition') ?? "error"
+            if (liff.isApiAvailable('multipleLiffTransition')) {
+                window.location.href = "https://line.me/{liffId}"; // URL for another LIFF app
+            }
 
         })
         .catch((err) => {
             // Error happens during initialization
             console.log(err.code, err.message);
-            document.getElementById('userId').innerHTML = "無法取得資料";
-
         });
 
 </script>
