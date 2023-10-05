@@ -13,23 +13,14 @@
     <p>displayName: <span id="displayName"></span></p>
     <p>pictureUrl: <span id="pictureUrl"></span></p>
     <p>statusMessage: <span id="statusMessage"></span></p>
+    <p>getOS: <span id="userOS"></span></p>
+    <p>getLanguage: <span id="userLang"></span></p>
+    <p>getVersion: <span id="userVer"></span></p>
     <!-- <button id="logoutBtn">登出</button> -->
 </body>
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
 <script>
-
-    // document.getElementById("logoutBtn").addEventListener("click", function () {
-    //     alert("登入狀態:", liff.isLoggedIn());
-    //     if (liff.isLoggedIn()) {
-    //         liff.logout();
-    //         alert("已登出");
-    //     }
-    //     document.getElementById('userId').innerHTML = ""
-    //     document.getElementById('displayName').innerHTML = ""
-    //     document.getElementById('pictureUrl').innerHTML = ""
-    //     document.getElementById('statusMessage').innerHTML = ""
-    // });
 
     // Using a Promise object初始化
     liff.init({
@@ -51,6 +42,11 @@
                     document.getElementById('userId').innerHTML = "getProfile error";
                 });
 
+            //取得使用者執行 LIFF 應用程式的環境
+            document.getElementById('userOS').innerHTML = liff.getOS()
+            document.getElementById('userLang').innerHTML = liff.getLanguage()
+            document.getElementById('userVer').innerHTML = liff.getVersion()
+
         })
         .catch((err) => {
             // Error happens during initialization
@@ -58,11 +54,6 @@
             document.getElementById('userId').innerHTML = "無法取得資料";
 
         });
-
-    // Using a callback
-    // liff.init({ liffId: "2001009394-0MjMVKvv" }, successCallback, errorCallback);
-
-
 
 </script>
 
