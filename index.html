@@ -21,7 +21,7 @@
     <p>isInClient: <span id="isInClient"></span></p>
     <p>isLoggedIn: <span id="isLoggedIn"></span></p>
     <p>shareTargetPicker isApiAvailable: <span id="shareIsApiAvailable"></span></p>
-    <p>multipleTargetPicker isApiAvailable: <span id="multipleIsApiAvailable"></span></p>
+    <p>是否允許跳轉其他網頁: <span id="multipleIsApiAvailable"></span></p>
     <!-- <button id="logoutBtn">登出</button> -->
 </body>
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
@@ -75,9 +75,9 @@
                     })
             }
             document.getElementById('multipleIsApiAvailable').innerHTML = liff.isApiAvailable('multipleLiffTransition') ?? "error"
-            if (liff.isApiAvailable('multipleLiffTransition')) {
-                window.location.href = "https://www.google.com.tw/"; // URL for another LIFF app
-            }
+            // if (liff.isApiAvailable('multipleLiffTransition')) {
+            //     window.location.href = "https://www.google.com.tw/"; // URL for another LIFF app
+            // }
 
         })
         .catch((err) => {
