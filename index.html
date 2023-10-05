@@ -9,40 +9,27 @@
 </head>
 
 <body>
-    <button id="loginBtn">登入</button>
     <p>userId: <span id="userId"></span></p>
     <p>displayName: <span id="displayName"></span></p>
     <p>pictureUrl: <span id="pictureUrl"></span></p>
     <p>statusMessage: <span id="statusMessage"></span></p>
-    <button id="logoutBtn">登出</button>
+    <!-- <button id="logoutBtn">登出</button> -->
 </body>
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
 <script>
 
-    document.getElementById("logoutBtn").addEventListener("click", function () {
-        alert("登入狀態:", liff.isLoggedIn());
-        if (liff.isLoggedIn()) {
-            liff.logout();
-            alert("已登出");
-        }
-        document.getElementById('userId').innerHTML = ""
-        document.getElementById('displayName').innerHTML = ""
-        document.getElementById('pictureUrl').innerHTML = ""
-        document.getElementById('statusMessage').innerHTML = ""
-
-    });
-
-
-    // 初始化 LIFF
-    liff.init({
-        liffId: "2001009394-0MjMVKvv", // 使用你自己的 liffId
-    })
-        .catch((err) => {
-            alert("LIFF 初始化错误:", err);
-        });
-
-
+    // document.getElementById("logoutBtn").addEventListener("click", function () {
+    //     alert("登入狀態:", liff.isLoggedIn());
+    //     if (liff.isLoggedIn()) {
+    //         liff.logout();
+    //         alert("已登出");
+    //     }
+    //     document.getElementById('userId').innerHTML = ""
+    //     document.getElementById('displayName').innerHTML = ""
+    //     document.getElementById('pictureUrl').innerHTML = ""
+    //     document.getElementById('statusMessage').innerHTML = ""
+    // });
 
     // Using a Promise object初始化
     liff.init({
@@ -72,7 +59,7 @@
 
         });
 
-    // // Using a callback
+    // Using a callback
     // liff.init({ liffId: "2001009394-0MjMVKvv" }, successCallback, errorCallback);
 
 
